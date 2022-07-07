@@ -1,0 +1,19 @@
+name: leanyf
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8
+  - toolz
+  - scikit-learn
+  - pip
+  - tensorflow
+  - matplotlib
+  - seaborn
+  - optuna
+  - pandas
+  - dill
+  - pip:
+    - wandb
+    - tensorflow-addons
+    - h5py
