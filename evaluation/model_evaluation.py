@@ -121,14 +121,14 @@ if __name__ == "__main__":
             print("0")
         elif run2analyze == "2021Xmas1D":
             dir_out = cst.my_project.params_dir
-            dir_out = dir_out / "2021 12 big runs"
+            dir_out = dir_out / "huge_runs"
             fn_asapID2AU = cst.root_dir / "raw_data" / "Algeria_REGION_id.csv"
             fn_stats90 = cst.root_dir / "raw_data" / "Algeria_stats90.csv"
-            input_data = '1D' # input_data = '2D'
+            input_data = '2D' # input_data = '1D'
             for model_name in dir_out.glob(f'*{input_data}*'):
                 model_name = model_name.parts[-1]
                 print(model_name)
-                for flavour in ['v_large_run_conv_filters','v_large_run_conv_filters_dropout']:
+                for flavour in ['v10_big_run_avgPool']:
                     out = []
                     for crop_id in range(0, 3):
                         for forecast_time in cst.forecast_times:
@@ -145,7 +145,7 @@ if __name__ == "__main__":
                     df_out.to_csv(cst.root_dir / f"data/model_evaluation_{input_data}_{flavour}_CNN.csv", index=False)
         elif run2analyze == "2021Xmas2D":
             dir_out = cst.my_project.params_dir
-            dir_out = dir_out / "2021 12 big runs"
+            dir_out = dir_out / "huge_runs"
             fn_asapID2AU = cst.root_dir / "raw_data" / "Algeria_REGION_id.csv"
             fn_stats90 = cst.root_dir / "raw_data" / "Algeria_stats90.csv"
             input_data = '2D' # input_data = '2D'
