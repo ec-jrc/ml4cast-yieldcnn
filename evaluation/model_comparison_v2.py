@@ -36,11 +36,9 @@ def plot_accuracy_vs_time(df, my_colors_, x_labels, filename=''):
 # model_evaluation saves in data, the file is moved to a new directory
 CNNdir = cst.root_dir / f"data//Big run evaluation"
 CNNfn = CNNdir / f"model_evaluation_1D_v_large_run_conv_filters_CNN.csv"
-prefix_png_out = '1D_MISO_v_large_run_conv_filters_CNN'
-CNNfn = CNNdir / f"model_evaluation_1D_v_large_run_conv_filters_dropout_CNN.csv"
-prefix_png_out = '1D_MISO_v_large_run_conv_filters_dropout_CNN'
+df_CNN_1D = pd.read_csv(CNNfn)
 CNNfn = CNNdir / f"model_evaluation_2D_v10_big_run_avgPool_CNN.csv"
-prefix_png_out = '2D_MISO_v10_big_run_avgPool_CNN'
+prefix_png_out = '1D_2D_MISO_v10_big_run_avgPool_CNN'
 df_CNN = pd.read_csv(CNNfn)
 
 target_var = 'Yield'
@@ -81,6 +79,13 @@ for crop_name in df_bench['Crop'].unique():
         colors = ['lime','darkgreen','indigo','magenta']
         for j, model_type in enumerate(dfc.Estimator.unique()):
             axs.plot(dfc.loc[dfc.Estimator == model_type, 'lead_time'].values, dfc.loc[dfc.Estimator == model_type, 'rRMSE_p'].values, color=colors[j], linewidth=1, marker='o', label=model_type)
+
+    df = df_CNN_1D.loc[df_CNN_1D.targetVar == target_var.lower()].copy()
+    if crop_name in df.Crop.unique():
+        dfc = df.loc[df.Crop == crop_name].copy()
+        colors = ['indigo', 'magenta']
+        for j, model_type in enumerate(dfc.Estimator.unique()):
+            axs.plot(dfc.loc[dfc.Estimator == model_type, 'lead_time'].values,dfc.loc[dfc.Estimator == model_type, 'rRMSE_p'].values, color=colors[j], linewidth=1, marker='o', label=model_type)
 
     # tidy a bit and save
     axs.set_ylim(0, 50)
