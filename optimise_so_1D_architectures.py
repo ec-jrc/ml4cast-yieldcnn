@@ -28,7 +28,7 @@ import sits.data_generator_1D2D as data_generator
 # run configuration for data augmentation
 # --Xshift --Xnoise --Ynoise
 # global vars
-version = 'test'
+version = 'testpaper'
 N_CHANNELS = 4  # -- NDVI, Rad, Rain, Temp
 dict_train_params = {
     'optuna_metric': 'rmse', #'rmse' or 'r2'
@@ -79,8 +79,8 @@ def optunaHyperSet2Test(Xd): #Xd id the time dimension of X
         'learning_rate': [0.001, 0.01],
         'fc_conf': [0, 1],
         # 'n_epochs': {'low': 30, 'high':  150, 'step': 20},
-        'n_epochs': {'low': 30, 'high': 90, 'step': 15},
-        'batch_size': [32, 64, 128]
+        'n_epochs': {'low': 100, 'high': 250, 'step': 50}, #'low': 30, 'high': 90, 'step': 15
+        'batch_size':  [64, 128] #32,64,128
     }
     return x
 
@@ -317,7 +317,7 @@ def objective_1DCNN(trial):
                                  nunits_fc=nunits_fc_,
                                  activation='sigmoid',
                                  l2_rate=dict_train_params['l2_rate'],
-                                 verbose=False)
+                                 verbose=True)
     elif model_type == 'simple':
         model = Archi_simple(Xt_,
                              nbunits_conv=nbunits_conv_,

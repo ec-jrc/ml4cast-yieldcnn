@@ -1,0 +1,3 @@
+*.pyc
+.idea
+/mysrc/local_constants.py
